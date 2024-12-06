@@ -1,58 +1,89 @@
-Exercise 6 – Demonstrate a simple way to eliminate
-resource contention - suspending the scheduler.
+# Exercise 6: Eliminating Resource Contention by Suspending the Scheduler
 
-This project demonstrates the control of access to shared resources using FreeRTOS Critical Sections. The system is designed to manage synchronization between tasks operating multiple LEDs. The implementation uses the STM32F401CCU6 as the main microcontroller.
+This project demonstrates the control of access to shared resources using **FreeRTOS Critical Sections**. The system is designed to manage synchronization between tasks operating multiple LEDs. The implementation uses the **STM32F103C8T6** as the main microcontroller.
 
+---
 
-Diagram Task :
+## **Diagram Task**
+[Insert your task scheduling diagram here]
 
+---
 
-Required Hardware:
+## **Required Hardware**
+- **STM32F103C8T6** Microcontroller
+- LEDs (Green, Red, Yellow)
 
-STM32F401CCU6
-LEDs
-Required Software:
+---
 
-STM32CubeIDE
-FreeRTOS
-How It Works:
+## **Required Software**
+- **STM32CubeIDE**
+- **FreeRTOS**
 
-Semaphore and Task Initialization:
+---
 
-The project utilizes two main tasks: GreenTask and RedTask.
-Both tasks compete to access a shared resource (the AccessSharedData function) protected by a Critical Section.
-Task Description:
+## **How It Works**
 
-a. RedTask:
+### **Semaphore and Task Initialization**
+The project utilizes two main tasks:
+1. **GreenTask** 
+2. **RedTask**
 
-Turns on the red LED.
-Enters the critical section to access the shared resource.
-Turns off the red LED and delays for 100ms before repeating.
+Both tasks compete to access a shared resource (`AccessSharedData`) that is protected by a **Critical Section**.
 
-b. GreenTask:
+### **Task Description**
 
-Turns on the green LED.
-Enters the critical section to access the shared resource.
-Turns off the green LED and delays for 500ms before repeating.
+#### **RedTask**
+- Turns on the **red LED**.
+- Enters the critical section to access the shared resource.
+- Turns off the red LED.
+- Delays for **100ms** before repeating.
 
-Critical Section Mechanism:
+#### **GreenTask**
+- Turns on the **green LED**.
+- Enters the critical section to access the shared resource.
+- Turns off the green LED.
+- Delays for **500ms** before repeating.
 
-The critical section is used to prevent other tasks from accessing the shared resource simultaneously.
-The task currently in the critical section locks the resource, forcing other tasks to wait until the section is released.
-Task Behavior:
+---
 
-a. GreenTask and RedTask:
+## **Critical Section Mechanism**
+- A **critical section** is used to prevent other tasks from accessing the shared resource simultaneously.
+- The task currently in the critical section locks the resource, forcing other tasks to **wait** until the section is released.
+- Functions used:
+  - **`taskENTER_CRITICAL()`**
+  - **`taskEXIT_CRITICAL()`**
 
-Both tasks attempt to enter the critical section alternately.
-If a conflict occurs (e.g., the resource is already in use), the yellow LED lights up to indicate contention.
-b. Critical Section Control:
+---
 
-The use of taskENTER_CRITICAL() and taskEXIT_CRITICAL() ensures exclusive access to the shared resource.
-LED Operation Cycle:
+### **Task Behavior**
 
-The green and red LEDs light up alternately with their respective delay times.
-The yellow LED lights up only when contention occurs while accessing the shared resource
+#### **GreenTask and RedTask**
+- Both tasks alternate in their attempts to access the critical section.
+- If contention occurs (e.g., the resource is already in use), the **yellow LED** lights up as an indicator.
 
-Hardware Overview:
+#### **Critical Section Control**
+- The critical section ensures exclusive access to the shared resource, eliminating resource contention.
 
-Demo vidoe:
+---
+
+## **LED Operation Cycle**
+
+| **LED**   | **Behavior**                                                                                 |
+|-----------|-----------------------------------------------------------------------------------------------|
+| **Green** | Lights up when the **GreenTask** accesses the shared resource and turns off after 500ms.       |
+| **Red**   | Lights up when the **RedTask** accesses the shared resource and turns off after 100ms.         |
+| **Yellow**| Lights up when contention occurs, indicating that the shared resource is already in use.       |
+
+---
+
+## **Hardware Overview**
+- **Microcontroller**: STM32F103C8T6
+- **LEDs**: 
+  - **Green** (for GreenTask)
+  - **Red** (for RedTask)
+  - **Yellow** (for contention indicator)
+
+---
+
+## **Demo Video**
+
