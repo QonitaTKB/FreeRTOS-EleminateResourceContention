@@ -5,7 +5,7 @@ This project demonstrates the control of access to shared resources using **Free
 ---
 
 ## **Diagram Task**
-[Insert your task scheduling diagram here]
+(https://drive.google.com/file/d/1BsYlWBv_lIHqVPYPp2pet7b479pBsCVv/view?usp=drive_link)
 
 ---
 
@@ -82,8 +82,8 @@ Both tasks compete to access a shared resource (`AccessSharedData`) that is prot
   - **Green** (for GreenTask)
   - **Red** (for RedTask)
   - **Yellow** (for contention indicator)
-
+https://drive.google.com/file/d/1bw8df8BZkBLxUNLaiCxHkY_c2csTZsyV/view?usp=drive_link
 ---
 
 ## **Demo Video**
-
+https://drive.google.com/file/d/11pYOTO_6Ful_7HT7rU9f1Z_bNVjdV-Fe/view?usp=drive_link
